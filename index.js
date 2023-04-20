@@ -1,17 +1,35 @@
 function hasTargetSum(array, target) {
-  // Write your algorithm here
+  arrayCopy = [...array]
+  arrayCopy.shift()
+
+  for (const i of array) {
+    for (const j of arrayCopy) {
+      if (i + j === target) {
+        return true
+      }
+    }
+    arrayCopy.shift()
+  }
+
+  return false
 }
 
 /* 
-  Write the Big O time complexity of your function here
+  O(n²)
 */
 
 /* 
-  Add your pseudocode here
+  creat a copy of array, removing first element
+  Iterate over elements in original array
+    iterate over elements in copy of array
+      if current original element plus current copy element equals target
+        return true
+      else remove first element in copy
+  return false
 */
 
 /*
-  Add written explanation of your solution here
+  Returns true if the sum of any two numbers in the input array equals the target number and false if not.
 */
 
 // You can run `node index.js` to view these console logs
@@ -29,6 +47,21 @@ if (require.main === module) {
 
   console.log("Expecting: false");
   console.log("=>", hasTargetSum([1, 2, 5], 4));
+
+  console.log("");
+
+  console.log("Expecting: true");
+  console.log("=>", hasTargetSum([36, 8, 12, 19, 64], 100));
+
+  console.log("");
+  
+  console.log("Expecting: true");
+  console.log("=>", hasTargetSum([0, 0, 1], 0));
+
+  console.log("");
+
+  console.log("Expecting: false");
+  console.log("=>", hasTargetSum([1, 4, 5], 4));
 }
 
 module.exports = hasTargetSum;
